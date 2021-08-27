@@ -124,16 +124,65 @@
             </objects>
             <point key="canvasLocation" x="944.92753623188412" y="39.508928571428569"/>
         </scene>
-        <!--View Controller-->
+        <!--Enroll Modify View Controller-->
         <scene sceneID="Rrz-el-aO7">
             <objects>
-                <viewController storyboardIdentifier="addItemViewController" id="CG1-oK-eJn" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addItemViewController" id="CG1-oK-eJn" customClass="EnrollModifyViewController" customModule="OpenMarket" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qvj-Xk-hVf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BbD-ok-C6S">
+                                <rect key="frame" x="0.0" y="44" width="414" height="179"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="K5O-vP-bop">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCollectionViewCell" id="GsA-4p-4ok" customClass="PhotoCollectionViewCell" customModule="OpenMarket" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="25.5" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="bVy-HE-GmK">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="teP-uw-Amb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="teP-uw-Amb" firstAttribute="leading" secondItem="bVy-HE-GmK" secondAttribute="leading" id="3HV-nv-5Pb"/>
+                                                <constraint firstItem="teP-uw-Amb" firstAttribute="top" secondItem="bVy-HE-GmK" secondAttribute="top" id="Hkl-g6-WB7"/>
+                                                <constraint firstAttribute="trailing" secondItem="teP-uw-Amb" secondAttribute="trailing" id="IXG-UP-NZE"/>
+                                                <constraint firstAttribute="bottom" secondItem="teP-uw-Amb" secondAttribute="bottom" id="tBP-gk-dc2"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageView" destination="teP-uw-Amb" id="B7i-xj-7CF"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="CG1-oK-eJn" id="Wmu-io-neb"/>
+                                    <outlet property="delegate" destination="CG1-oK-eJn" id="F8k-qh-i5t"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="41a-Hp-ePe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BbD-ok-C6S" firstAttribute="top" secondItem="41a-Hp-ePe" secondAttribute="top" id="Y4r-If-g6u"/>
+                            <constraint firstItem="BbD-ok-C6S" firstAttribute="leading" secondItem="41a-Hp-ePe" secondAttribute="leading" id="doc-E3-Iks"/>
+                            <constraint firstItem="41a-Hp-ePe" firstAttribute="trailing" secondItem="BbD-ok-C6S" secondAttribute="trailing" id="oNu-IP-LoI"/>
+                            <constraint firstItem="BbD-ok-C6S" firstAttribute="height" secondItem="Qvj-Xk-hVf" secondAttribute="height" multiplier="0.2" id="ohH-QB-oOl"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="BbD-ok-C6S" id="7H9-HU-JDI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JUd-U8-tTj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
