@@ -15,6 +15,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var stockLabel: UILabel!
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         self.layer.borderColor = UIColor.gray.cgColor
         self.layer.borderWidth = 2.0
         self.layer.cornerRadius = 10.0

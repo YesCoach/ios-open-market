@@ -11,19 +11,32 @@ class OpenMarketViewController: UIViewController {
     @IBOutlet weak var lodingIndicator: UIActivityIndicatorView!
     
     private var products: [ItemData] = []
+    private var page = 15
     private let networkManager = NetworkManager()
     private let cellIdentifier = "customCollectionViewCell"
     private let addVCIdentifier = "addItemViewController"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        requestNextPage()
+    }
+    
+    @IBAction func AddItemButton(_ sender: UIBarButtonItem) {
+        guard let addVC = self.storyboard?.instantiateViewController(identifier: self.addVCIdentifier) else { return }
+        self.navigationController?.pushViewController(addVC, animated: true)
+    }
+    
+    private func requestNextPage() {
         lodingIndicator.startAnimating()
-        self.networkManager.commuteWithAPI(API: GetItemsAPI(page: 1)) { result in
+        lodingIndicator.isHidden = false
+        
+        self.networkManager.commuteWithAPI(API: GetItemsAPI(page: page)) { result in
             if case .success(let data) = result {
                 guard let product = try? JsonDecoder.decodedJsonFromData(type: ItemsData.self, data: data) else {
                     return
                 }
-                self.products = product.items
+                self.products.append(contentsOf: product.items)
+                self.page += 1
                 
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
@@ -32,11 +45,6 @@ class OpenMarketViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    @IBAction func AddItemButton(_ sender: UIBarButtonItem) {
-        guard let addVC = self.storyboard?.instantiateViewController(identifier: self.addVCIdentifier) else { return }
-        self.navigationController?.pushViewController(addVC, animated: true)
     }
 }
 
@@ -77,5 +85,16 @@ extension OpenMarketViewController: UICollectionViewDelegateFlowLayout {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         collectionView.collectionViewLayout.invalidateLayout()
+    }
+}
+
+extension OpenMarketViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        let lastItem = products.count - 1
+        for indexPath in indexPaths {
+            if lastItem == indexPath.item {
+                requestNextPage()
+            }
+        }
     }
 }
