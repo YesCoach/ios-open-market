@@ -21,10 +21,11 @@ class OpenMarketViewController: UIViewController {
         requestNextPage()
     }
     
-    @IBAction func AddItemButton(_ sender: UIBarButtonItem) {
-        guard let addVC = self.storyboard?.instantiateViewController(identifier: self.addVCIdentifier) else { return }
-        self.navigationController?.pushViewController(addVC, animated: true)
-    }
+//    @IBAction func AddItemButton(_ sender: UIBarButtonItem) {
+//        guard let addVC = self.storyboard?.instantiateViewController(identifier: self.addVCIdentifier) else { return }
+//        addVC.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "등록", style: .done, target: .none, action: .none)
+//        self.navigationController?.pushViewController(addVC, animated: true)
+//    }
     
     private func requestNextPage() {
         lodingIndicator.startAnimating()
